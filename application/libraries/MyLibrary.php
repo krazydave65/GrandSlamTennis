@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class GrandSlam {
+class MyLibrary {
     
     protected $CI;
 
@@ -9,9 +9,9 @@ class GrandSlam {
         $this->CI =& get_instance();
     }
 
-    public function TemplateView($viewName){
+    public function TemplateView($viewName, $data = []) {
         $this->CI->load->view('Templates/Header');
-        $this->CI->load->view($viewName);
+        $this->CI->load->view($viewName,$data);
         $this->CI->load->view('Templates/Footer');
     }
 

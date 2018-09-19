@@ -87,7 +87,13 @@
         <div class="container-fluid">
         <div class="row">
             <p>
-            <br>
+            <br> 
+            <?php
+                if (isset($_SESSION['logged_in'])) {
+                    echo("Welcome " . $_SESSION['username']);
+                }
+            ?>
+
             <br>
             </p>
         </div>
@@ -133,7 +139,7 @@
             <div class="col-lg-4">
                 <div class="row text-center">
                 <div class="col-lg-4">
-                    <a href="schedule-location.php">
+                    <a href="ScheduleLocation">
                     <span class="navLinkStyle">Schedule and Location </span>
                     </a>
                 </div>
@@ -143,7 +149,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4">
-                    <a href="sign-in.php">
+                    <a href="SignIn">
                     <span class="navLinkStyle">Sign In</span>
                     <a/>
                 </div>
