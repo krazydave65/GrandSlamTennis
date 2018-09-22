@@ -1,6 +1,7 @@
 <html>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
     <style>
 
         .DSC_Uppercase {
@@ -132,6 +133,15 @@
                 <div class="row">
                 <div class="col-lg-12">
                     <!-- MIDDLE GUTTER -->
+                    <?php
+                        if (isset($_SESSION['admin_rights'])){
+                            if ($_SESSION['admin_rights'] == 1) {
+                                echo("<a href='AdminScheduleLocation'>
+                                <span class='navLinkStyle'>Admin Page</span>
+                                </a>");
+                            }
+                        }
+                    ?>
                 </div>
                 </div>
             </div>
@@ -149,9 +159,23 @@
                     </a>
                 </div>
                 <div class="col-lg-4">
-                    <a href="SignIn">
-                    <span class="navLinkStyle">Sign In</span>
-                    <a/>
+                    <?php
+                        if (isset($_SESSION['admin_rights'])){
+                            if ($_SESSION['admin_rights'] == 1){
+                                echo("<a href='SignIn/SignOut'>
+                                <span class='navLinkStyle'>Sign Out</span></a>");
+                            }
+                            else {
+                                echo("<a href='SignIn'>
+                                <span class='navLinkStyle'>Sign In</span></a>");
+                            }
+                        }
+                        else {
+                            echo("<a href='SignIn'>
+                            <span class='navLinkStyle'>Sign In</span></a>");
+                        }
+
+                    ?>
                 </div>
                 </div>
                 <div class="row">

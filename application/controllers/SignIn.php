@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class SignIn Extends CI_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->library('MyLibrary');
-        $this->load->library('session');
+        
     }
 
     public function index(){
@@ -14,13 +13,23 @@ class SignIn Extends CI_Controller {
         
     }
 
+    public function SignOut(){
+        session_destroy();
+        redirect("signin");
+    }
+
     public function LoginAuthenticate(){
         $user_data = $this->input->post();
         $username = $user_data['user_name'];
         $password = $user_data['password'];
 
         if ($this->usermodel->getauthentication($username, $password)) {
-            $this->mylibrary->templateview('signin');
+            if ($_SESSION['admin_rights'] == 1 ){
+                redirect('adminschedulelocation');  
+            }
+            else {
+                redirect('schedulelocation');
+            }
         }
         else {
             $this->mylibrary->templateview('signin');

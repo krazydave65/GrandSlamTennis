@@ -15,8 +15,8 @@ class Admin extends CI_Controller {
 
         if ($this->usermodel->getauthentication($username, $password)) {
             if ($_SESSION['admin_rights'] == 1 ){
-
-                echo "successfull login" . $_SESSION['username'];
+                //go to welcome page
+                echo "successfull login " . $_SESSION['username'];
             }
             else {
                 echo "failed login";
@@ -27,4 +27,5 @@ class Admin extends CI_Controller {
         }
 
     }
+
 }
