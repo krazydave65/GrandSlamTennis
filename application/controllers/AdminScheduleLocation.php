@@ -46,11 +46,6 @@ class AdminScheduleLocation extends CI_Controller {
         
         $error_messages = Array();
 
-        if ($firstname == "" || $lastname == "" || $username == "" 
-        || $email == "" || $password == "" || $passwordconfirm == "" ) {
-            array_push($error_messages, "Field must contain a value");
-        }
-
         if ($password != $passwordconfirm) {
             array_push($error_messages, "Passwords must match");
         }
@@ -77,4 +72,44 @@ class AdminScheduleLocation extends CI_Controller {
 
         redirect("adminschedulelocation");
     }
+
+
+    public function AddNewLocation(){
+        
+        //validate new location form data
+        //parse form data
+        $user_data = $this->input->post();
+        $location = $user_data['location'];
+        
+        $found_existing_location = FALSE;
+
+        foreach($this->locationmodel->getAllLocations() as $db_location){
+            if (strtolower($location) == strtolower($db_location->name)) {
+                $found_existing_location = TRUE;
+            }
+        }
+
+        if ($found_existing_location){
+            $_SESSION['duplicate_location'] = "The location ".$location." already exists!";
+            $this->session->mark_as_flash('duplicate_location');
+        }
+        else 
+        {
+            //save new location to database
+            $db_result = $this->locationmodel->AddNewLocation($location);
+            
+            if ($db_result){
+                $_SESSION['add_location_success'] = "Location '".$location."' successfully created!";
+                $this->session->mark_as_flash('add_location_success');
+            }
+            else{
+                $_SESSION['add_location_failed'] = "Failed to create new user";
+                $this->session->mark_as_flash('add_location_failed');
+            }
+            
+        }   
+
+        redirect("adminschedulelocation");
+    }
+    
 }

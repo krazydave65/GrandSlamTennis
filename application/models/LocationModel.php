@@ -26,4 +26,19 @@ class LocationModel extends CI_Model{
 
         return $Location;          
     }
+
+    public function AddNewLocation($location){
+        $data = array('name' => $location);
+        
+        //parameters: table_name, table_column_data
+        $str = $this->db->insert_string('locations', $data);
+        
+        //insert into database...returns true or false
+        if ($this->db->query($str)){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
 }

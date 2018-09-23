@@ -31,6 +31,31 @@
             }
             echo("</div>");
         }
+
+        //LOCATIONS
+        if ($this->session->flashdata("add_location_success") || 
+            $this->session->flashdata("add_location_failed")){
+
+            if ($this->session->flashdata("add_location_success")){
+                echo("<div class='alert alert-success' role='alert'>");
+                echo($this->session->flashdata("add_location_success"));
+                echo("</div>");
+            }
+            elseif ($this->session->flashdata("add_location_failed")){
+                echo("<div class='alert alert-danger' role='alert'>");
+                echo($this->session->flashdata("add_location_failed"));
+                echo("</div>");
+            }
+        }
+
+        if ($this->session->flashdata("duplicate_location")){
+            $error_messages = $this->session->flashdata("duplicate_location");
+
+            echo("<div class='alert alert-warning' role='alert'>");
+            echo($error_messages);
+            echo("</div>");
+        }
+
     ?>
 
 
@@ -108,6 +133,11 @@
         </table>
     </div>
 
+    <h2>Add New Location</h2>
+    <form action="adminschedulelocation/AddNewLocation" method="post">
+        Location: <input type="text" name="location" required><br>
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
 
